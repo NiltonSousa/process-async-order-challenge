@@ -17,6 +17,6 @@ try {
 }
 
 processOrderConsumerHandler().catch((err: unknown) => {
-  console.error("Consumer failed:", err);
+  console.error("Consumer failed:", JSON.stringify(err));
   process.exit(1);
 });

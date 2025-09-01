@@ -6,7 +6,7 @@ import {
   type EachMessagePayload,
 } from "kafkajs";
 import { delay } from "../common/delay";
-import { DELAY_IN_SECONDS } from "../env/env";
+import { DELAY_IN_SECONDS, KAFKA_BROKERS, KAFKA_CLIENT_ID } from "../env/env";
 
 export interface ProducePayload {
   topic: string;
@@ -131,8 +131,8 @@ export class KafkaClient implements IKafkaClient {
 }
 
 const kafkaClient = new KafkaClient({
-  clientId: "my-app",
-  brokers: ["localhost:9093"],
+  clientId: KAFKA_CLIENT_ID,
+  brokers: [KAFKA_BROKERS],
 });
 
 export default kafkaClient;
