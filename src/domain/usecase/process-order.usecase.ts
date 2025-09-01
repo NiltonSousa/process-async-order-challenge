@@ -1,3 +1,5 @@
+import type { OrderEntity } from "../entity";
+
 export interface IProcessOrderUseCase {
-  execute: () => Promise<void>;
+  execute: (order: OrderEntity) => void;
 }

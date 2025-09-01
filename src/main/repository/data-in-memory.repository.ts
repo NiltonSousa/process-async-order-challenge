@@ -1,14 +1,14 @@
-import type { OrderStatus } from "@/domain/entity";
-import type { OrderStore } from "@/domain/repository";
+import type { OrderEntity } from "@/domain/entity";
+import type { IOrderStore } from "@/domain/repository";
 
-export class InMemoryOrderStore implements OrderStore {
-  private readonly data = new Map<string, OrderStatus>();
+export class InMemoryOrderStore implements IOrderStore {
+  private readonly data = new Map<string, OrderEntity>();
 
-  set(id: string, status: OrderStatus): void {
-    this.data.set(id, status);
+  set(id: string, order: OrderEntity): void {
+    this.data.set(id, order);
   }
 
-  get(id: string): OrderStatus | null {
+  get(id: string): OrderEntity | null {
     const order = this.data.get(id);
 
     if (!order) {
@@ -22,7 +22,7 @@ export class InMemoryOrderStore implements OrderStore {
     return this.data.has(id);
   }
 
-  toJSON(): Record<string, OrderStatus> {
+  toJSON(): Record<string, OrderEntity> {
     return Object.fromEntries(this.data.entries());
   }
 }
