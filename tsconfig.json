@@ -24,9 +24,6 @@
       "@tests/*": [
         "tests/*"
       ],
-      "@tests-int/*": [
-        "tests-int/*"
-      ]
     }
   },
   "include": [

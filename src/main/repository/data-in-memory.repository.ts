@@ -25,6 +25,10 @@ export class InMemoryOrderStore implements IOrderStore {
   toJSON(): Record<string, OrderEntity> {
     return Object.fromEntries(this.data.entries());
   }
+
+  clear(): void {
+    this.data.clear();
+  }
 }
 
 const store = new InMemoryOrderStore();

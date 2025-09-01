@@ -7,4 +7,5 @@ export interface IOrderStore {
   get: (id: string) => OrderEntity | null;
   has: (id: string) => boolean;
   toJSON: () => Record<string, OrderEntity>;
+  clear: () => void;
 }

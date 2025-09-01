@@ -20,6 +20,5 @@
     "\\.ts$": ["ts-jest"]
   },
   "roots": ["<rootDir>/tests/unit", "<rootDir>/src"],
-  "coveragePathIgnorePatterns": ["dist", "node_modules"],
-  "setupFiles": ["./jest.setEnvVars.js"]
+  "coveragePathIgnorePatterns": ["dist", "node_modules"]
 }
