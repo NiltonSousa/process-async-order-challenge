@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "process-async-request-challenge",
+  "name": "process-async-order-challenge",
   "license": "ISC",
   "author": "Nilton Sousa",
   "type": "module",
