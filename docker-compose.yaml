@@ -9,17 +9,13 @@ services:
     image: bitnami/kafka:3
     depends_on: [zookeeper]
     ports:
-      - "9092:9092" # interno (clients no mesmo compose podem usar kafka:9092)
-      - "9093:9093" # externo (host / outros containers)
+      - "9092:9092"
+      - "9093:9093"
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
-      # IMPORTANTE: anuncie endereços alcançáveis por quem consome
-      # Se o consumidor estiver em OUTRO compose/contêiner e você usa Docker Desktop:
-      # - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://host.docker.internal:9093
-      # Em Linux puro (sem host.docker.internal), use o IP da bridge do host (ajuste 172.17.0.1):
       - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://172.17.0.1:9093
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
