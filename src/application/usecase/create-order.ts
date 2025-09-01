@@ -5,7 +5,7 @@ import type {
   ICreateOrderUseCaseInput,
 } from "@/domain/usecase";
 import type { IKafkaClient } from "@/main/clients";
-import { KAFKA_TOPIC_ORDERS } from "@/main/env/env";
+import { KAFKA_TOPIC_ORDERS_REQUEST } from "@/main/env/env";
 import { randomUUID } from "node:crypto";
 
 export class CreateOrderUseCaseImpl implements ICreateOrderUseCase {
@@ -26,8 +26,10 @@ export class CreateOrderUseCaseImpl implements ICreateOrderUseCase {
 
     this.dataStore.set(clientDocument, order);
 
+    await this.kafkaClient.connect();
+
     await this.kafkaClient.produce({
-      topic: KAFKA_TOPIC_ORDERS,
+      topic: KAFKA_TOPIC_ORDERS_REQUEST,
       messages: [{ value: JSON.stringify(order) }],
     });
 
