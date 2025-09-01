@@ -5,6 +5,8 @@ import {
   logLevel,
   type EachMessagePayload,
 } from "kafkajs";
+import { delay } from "../common/delay";
+import { DELAY_IN_SECONDS } from "../env/env";
 
 export interface ProducePayload {
   topic: string;
@@ -99,12 +101,17 @@ export class KafkaClient implements IKafkaClient {
       fromBeginning: opts?.fromBeginning ?? false,
     });
 
+    console.log(
+      `Consumer subscribed to topic ${topic}. Waiting for messages...`
+    );
+
     await consumer.run({
       eachMessage: async ({
         topic,
         partition,
         message,
       }: EachMessagePayload) => {
+        await delay(Number(DELAY_IN_SECONDS));
         await handler({
           topic,
           partition,

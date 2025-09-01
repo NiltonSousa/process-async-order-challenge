@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import { createOrderHandler, getOrderHandler } from "./handlers";
+import { processOrderConsumerHandler } from "./handlers/consumer-order-request";
 
 const fastify = Fastify({
   logger: true,
@@ -14,3 +15,8 @@ try {
   fastify.log.error(err);
   process.exit(1);
 }
+
+processOrderConsumerHandler().catch((err: unknown) => {
+  console.error("Consumer failed:", err);
+  process.exit(1);
+});

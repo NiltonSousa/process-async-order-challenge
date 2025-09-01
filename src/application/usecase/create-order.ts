@@ -17,14 +17,10 @@ export class CreateOrderUseCaseImpl implements ICreateOrderUseCase {
   async execute(input: ICreateOrderUseCaseInput): Promise<OrderEntity> {
     const { clientDocument, items } = input;
 
-    const order = OrderEntity.build(
-      randomUUID(),
-      clientDocument,
-      items,
-      "CREATED"
-    );
+    const orderId = randomUUID();
+    const order = OrderEntity.build(orderId, clientDocument, items, "CREATED");
 
-    this.dataStore.set(clientDocument, order);
+    this.dataStore.set(orderId, order);
 
     await this.kafkaClient.connect();
 
